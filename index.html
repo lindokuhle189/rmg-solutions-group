@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RMG Solutions Group | Clean. Safe. Powered.</title>
+<link rel="icon" href="assets/logo.png" type="image/png">
+<meta name="description" content="RMG Solutions Group: cleaning, gardening, logistics and maintenance services across South Africa. One team. One standard. One solution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0a0a0c;
+  --bg-alt:#111114;
+  --panel:#17171b;
+  --panel-2:#1e1e24;
+  --line: rgba(255,255,255,.09);
+  --ink:#f5f4f1;
+  --ink-dim:#a9a9ae;
+  --orange:#ff6a1a;
+  --orange-dim:#cf5313;
+  --orange-tint: rgba(255,106,26,.14);
+  --shadow: 0 20px 50px rgba(0,0,0,.45);
+  --header-h: 64px;
+  --ease: cubic-bezier(.22,.9,.32,1);
+  --icon: #ffffff;
+}
+html[data-theme="light"]{
+  --bg:#f2efe9;
+  --bg-alt:#ffffff;
+  --panel:#ffffff;
+  --panel-2:#eee9df;
+  --line: rgba(20,20,10,.1);
+  --ink:#171712;
+  --ink-dim:#6b6a63;
+  --orange:#e85d04;
+  --orange-dim:#c94e02;
+  --orange-tint: rgba(232,93,4,.12);
+  --shadow: 0 20px 44px rgba(20,20,10,.12);
+  --icon: #111111;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Manrope',sans-serif;
+  line-height:1.5;
+  overflow-x:hidden;
+  transition:background .35s var(--ease), color .35s var(--ease);
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input,select,textarea{font-family:inherit;}
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 28px;}
+.display{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;line-height:.96;}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--orange);
+}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--orange);display:block;}
+.muted{color:var(--ink-dim);}
+.accent{color:var(--orange);}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+}
+:focus-visible{outline:2px solid var(--orange); outline-offset:3px; border-radius:4px;}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 28px;font-weight:700;font-size:14.5px;letter-spacing:.3px;
+  border-radius:6px;transition:transform .25s var(--ease), background .25s, color .25s, border-color .25s;
+  white-space:nowrap;
+}
+.btn--solid{background:var(--orange);color:#0a0a0c;}
+.btn--solid:hover{background:#fff;transform:translateY(-2px);}
+.btn--outline{border:2px solid var(--line);color:var(--ink);}
+.btn--outline:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px);}
+.btn--block{width:100%;}
+
+/* ============ LOGO MARK ============ */
+.logo-mark{
+  height:78px;width:auto;flex-shrink:0;object-fit:contain;border-radius:0;
+  mix-blend-mode:screen;
+  filter:contrast(1.15) brightness(1.12) drop-shadow(0 0 1px rgba(255,255,255,.9));
+}
+.hero__brand .logo-mark{height:86px;}
+.footer .logo-mark{height:90px;}
+.drawer .logo-mark{height:74px;}
+html[data-theme="light"] .logo-mark{
+  mix-blend-mode:normal;
+  filter:brightness(0) contrast(1.05) drop-shadow(0 1px 2px rgba(0,0,0,.2));
+}
+.logo-lockup{display:flex;align-items:center;gap:11px;}
+.logo-word{font-family:'Anton',sans-serif;font-size:15px;line-height:1.05;letter-spacing:.5px;}
+.logo-word span{display:block;}
+.logo-word .g1{color:var(--ink);}
+.logo-word .g2{color:var(--orange);font-size:12px;letter-spacing:2px;}
+.logo-lockup--img .logo-word{display:none;}
+
+/* ============ TOP BAR (all screen sizes) ============ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);
+  background:var(--bg-alt);border-bottom:1px solid var(--line);z-index:90;
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+}
+.topbar__left{display:flex;align-items:center;gap:16px;}
+.topbar__burger{
+  width:44px;height:44px;border-radius:10px;background:var(--panel-2);display:flex;
+  align-items:center;justify-content:center;font-size:17px;color:var(--icon);
+  transition:background .2s, transform .2s;
+}
+.topbar__burger:hover{background:var(--orange-tint);color:var(--orange);}
+.topbar__burger .tip{
+  position:absolute;left:0;top:52px;background:var(--panel-2);color:var(--ink);padding:6px 11px;
+  border-radius:6px;font-size:11.5px;font-weight:700;white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .2s;box-shadow:var(--shadow);
+}
+.topbar__burger{position:relative;}
+.topbar__burger:hover .tip{opacity:1;}
+.topbar__right{display:flex;align-items:center;gap:20px;}
+.topbar__brand{
+  font-family:'Anton',sans-serif;font-size:clamp(15px,2.2vw,20px);letter-spacing:1px;
+  color:var(--ink);text-transform:uppercase;white-space:nowrap;
+}
+.topbar__brand span{color:var(--orange);}
+@media (max-width:520px){.topbar__brand{font-size:13px;letter-spacing:.5px;}}
+
+/* ============ SIDEBAR DRAWER (opens on every screen size) ============ */
+.drawer{
+  position:fixed;inset:0;z-index:120;visibility:hidden;
+}
+.drawer__scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s var(--ease);}
+.drawer__panel{
+  position:absolute;top:0;left:0;height:100%;width:min(340px,86vw);
+  background:var(--bg-alt);transform:translateX(-100%);transition:transform .35s var(--ease);
+  display:flex;flex-direction:column;padding:26px 26px 30px;overflow-y:auto;
+  border-right:1px solid var(--line);
+}
+.drawer.open{visibility:visible;}
+.drawer.open .drawer__scrim{opacity:1;}
+.drawer.open .drawer__panel{transform:translateX(0);}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;}
+.drawer__close{width:38px;height:38px;border-radius:9px;background:var(--panel-2);display:flex;align-items:center;justify-content:center;color:var(--icon);}
+.drawer__nav{display:flex;flex-direction:column;gap:4px;margin-bottom:32px;}
+.drawer__link{
+  display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:8px;
+  font-weight:700;font-size:15px;color:var(--ink-dim);
+}
+.drawer__link i{width:20px;color:var(--icon);}
+.drawer__link.active,.drawer__link:hover{background:var(--panel-2);color:var(--ink);}
+.drawer__link.active i,.drawer__link:hover i{color:var(--orange);}
+.drawer__cta{margin-top:auto;display:flex;flex-direction:column;gap:12px;}
+.drawer__socials{display:flex;gap:14px;margin-top:20px;}
+.drawer__socials a{
+  width:40px;height:40px;border-radius:12px;border:none;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:0;background:transparent;
+}
+.drawer__socials a img{width:100%;height:100%;object-fit:contain;display:block;}
+
+/* ============ LAYOUT ============ */
+.site{padding-top:var(--header-h);}
+
+/* ============ HERO ============ */
+.hero{
+  --marquee-h: 48px;
+  position:relative;
+  height:calc(100dvh - var(--header-h) - var(--marquee-h));
+  min-height:520px;
+  display:flex;align-items:stretch;
+  background:var(--bg);overflow:visible;
+}
+.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;width:100%;align-items:start;height:100%;position:relative;}
+.hero__text{padding:12px 40px 28px 56px;position:relative;z-index:3;display:flex;flex-direction:column;justify-content:flex-start;height:100%;box-sizing:border-box;}
+.hero__brand{margin-bottom:10px;}
+.hero__title{font-size:clamp(42px,6.8vw,88px);}
+.hero__title .l1{color:var(--ink);}
+.hero__title .l2{color:var(--orange);}
+.hero__title .l3{color:var(--ink);}
+.hero__rule{display:flex;align-items:center;gap:14px;margin:10px 0 10px;}
+.hero__rule span{width:34px;height:3px;background:var(--orange);}
+.hero__rule small{font-size:13px;font-weight:800;letter-spacing:4px;color:var(--ink-dim);}
+.hero__tag{font-family:'Anton',sans-serif;font-size:clamp(18px,2.2vw,26px);letter-spacing:.5px;margin-bottom:12px;}
+.hero__tag .o{color:var(--orange);}
+.hero__desc{max-width:420px;color:var(--ink-dim);font-size:15px;margin-bottom:16px;}
+.hero__ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:auto;padding-bottom:8px;}
+
+.hero__visual{
+  position:relative;height:100%;overflow:hidden;
+  clip-path:polygon(14% 0, 100% 0, 100% 100%, 0% 100%);
+  background:#0a0a0c;
+}
+.hero__photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(1.05) contrast(1.05);
+}
+.hero__visual::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg, rgba(10,10,12,.35) 0%, rgba(10,10,12,.55) 55%, rgba(10,10,12,.92) 100%);
+}
+.hero__scene{position:absolute;inset:0;z-index:2;}
+.hero__scene svg{width:100%;height:100%;}
+.badge{
+  position:absolute;left:48%;bottom:72px;z-index:6;width:132px;height:132px;border-radius:50%;
+  background:var(--bg-alt);border:2px solid var(--orange);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  gap:6px;box-shadow:var(--shadow);pointer-events:none;transform:translateX(-30%);
+}
+.badge i{color:var(--orange);font-size:18px;}
+.badge b{font-size:11.5px;line-height:1.25;letter-spacing:.3px;}
+.badge b.o{color:var(--orange);}
+.hero__caption{
+  position:absolute;right:48px;bottom:40px;max-width:230px;font-size:14px;color:#d8d8dc;z-index:4;
+  text-align:right;
+}
+/* truck scene motion */
+.roadline{stroke-dasharray:26 22;animation:roaddash 1.1s linear infinite;}
+@keyframes roaddash{to{stroke-dashoffset:-96;}}
+.truck-group{animation:drive 4.2s ease-in-out infinite;}
+@keyframes drive{0%,100%{transform:translateX(0);}50%{transform:translateX(10px);}}
+.wheel{transform-box:fill-box;transform-origin:center;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.headlamp{animation:glow 1.8s ease-in-out infinite;}
+@keyframes glow{0%,100%{opacity:.5;}50%{opacity:1;}}
+.window-blink{animation:winkle 5s ease-in-out infinite;}
+@keyframes winkle{0%,100%{opacity:.35;}50%{opacity:.75;}}
+
+@media (max-width:980px){
+  .hero{height:auto;min-height:0;overflow:visible;}
+  .hero__grid{grid-template-columns:1fr;height:auto;}
+  .hero__text{padding:16px 24px 28px;height:auto;}
+  .hero__ctas{margin-top:8px;padding-bottom:0;}
+  .hero__visual{height:56vh;clip-path:polygon(0 8%,100% 0,100% 100%,0 100%);}
+  .badge{
+    left:24px;bottom:auto;top:auto;position:relative;margin:-56px auto 20px 24px;
+    z-index:6;transform:none;width:120px;height:120px;
+  }
+  .hero__caption{display:none;}
+}
+
+/* ============ MARQUEE ============ */
+.marquee{
+  background:var(--orange);color:#0a0a0c;overflow:hidden;position:relative;padding:14px 0;
+  height:48px;display:flex;align-items:center;box-sizing:border-box;
+}
+.marquee__track{display:flex;width:max-content;animation:scrollx 26s linear infinite;}
+.marquee__track span{
+  display:flex;align-items:center;gap:14px;font-family:'Anton',sans-serif;font-size:17px;letter-spacing:1px;
+  padding:0 26px;white-space:nowrap;
+}
+.marquee__track span i{font-size:10px;}
+@keyframes scrollx{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============ SECTION SHELL ============ */
+.section{padding:120px 0;position:relative;}
+.section--tight{padding:100px 0;}
+.section-head{max-width:640px;margin-bottom:60px;}
+.section-head h2{font-size:clamp(34px,4.4vw,54px);margin-top:16px;}
+.section-head p{color:var(--ink-dim);margin-top:16px;font-size:16px;max-width:520px;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease), transform .7s var(--ease);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ============ ABOUT ============ */
+.about{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.about__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start;}
+.about__quote{
+  border-left:3px solid var(--orange);padding-left:22px;margin:26px 0 26px;font-size:19px;font-weight:700;
+}
+.about__body p{color:var(--ink-dim);font-size:15.5px;margin-bottom:16px;max-width:520px;}
+.about__photo{border-radius:14px;overflow:hidden;margin-bottom:20px;height:180px;}
+.about__photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
+.about__stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 20px;}
+.stat b{font-family:'Manrope',sans-serif;font-weight:500;font-size:32px;color:var(--orange);display:block;}
+.stat span{font-size:12.5px;color:var(--ink-dim);font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+@media (max-width:900px){.about__grid{grid-template-columns:1fr;gap:36px;}}
+
+/* ============ SERVICES ============ */
+.services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.svc{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  transition:transform .3s var(--ease), border-color .3s;
+}
+.svc:hover{transform:translateY(-6px);border-color:var(--orange);}
+.svc__photo{position:relative;height:150px;overflow:hidden;}
+.svc__photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease);}
+.svc:hover .svc__photo img{transform:scale(1.08);}
+.svc__photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%, rgba(6,6,7,.88) 100%);}
+.svc__icon{
+  position:absolute;left:18px;bottom:14px;width:48px;height:48px;border-radius:50%;
+  background:#0a0a0c;color:#ffffff;border:2px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 8px 18px rgba(0,0,0,.35);z-index:3;
+}
+.svc__body{padding:22px 24px 26px;}
+.svc h3{font-size:18px;margin-bottom:8px;letter-spacing:.2px;}
+.svc p{color:var(--ink-dim);font-size:14.5px;}
+@media (max-width:900px){.services__grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:600px){.services__grid{grid-template-columns:1fr;}}
+
+/* ============ SERVE — FLIP/SLIDE CAROUSEL ============ */
+.serve{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.serve__grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.serve__visual{order:1;}
+.serve__copy{order:2;text-align:left;}
+.serve__copy .eyebrow{justify-content:flex-start;}
+@media (max-width:900px){
+  .serve__grid{grid-template-columns:1fr;gap:36px;}
+  .serve__copy{order:-1;text-align:center;}
+  .serve__copy .eyebrow{justify-content:center;}
+}
+.carousel{max-width:480px;margin:0 auto;position:relative;}
+.carousel__viewport{perspective:1600px;}
+.flip-card{
+  height:340px;width:100%;position:relative;cursor:pointer;
+}
+.flip-card__inner{
+  position:relative;width:100%;height:100%;transition:transform .7s var(--ease);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-card__inner{transform:rotateY(180deg);}
+.flip-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:30px;border:1px solid var(--line);
+}
+.flip-face--front{background:var(--panel);}
+.flip-face--front i{font-size:44px;color:var(--orange);margin-bottom:22px;}
+.flip-face--front h3{font-size:26px;font-family:'Anton',sans-serif;letter-spacing:.5px;margin-bottom:10px;}
+.flip-face--front span{color:var(--ink-dim);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.flip-face--back{background:var(--orange);color:#0a0a0c;transform:rotateY(180deg);}
+.flip-face--back i{font-size:26px;margin-bottom:16px;}
+.flip-face--back p{font-size:15.5px;font-weight:600;max-width:320px;}
+.flip-hint{position:absolute;bottom:14px;right:16px;font-size:11px;font-weight:700;opacity:.6;display:flex;align-items:center;gap:6px;}
+.carousel__controls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:30px;}
+.car-btn{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;
+  justify-content:center;transition:border-color .25s,color .25s,transform .2s;
+}
+.car-btn:hover{border-color:var(--orange);color:var(--orange);transform:scale(1.06);}
+.car-dots{display:flex;gap:9px;}
+.car-dots button{width:9px;height:9px;border-radius:50%;background:var(--line);transition:background .25s,width .25s;}
+.car-dots button.active{background:var(--orange);width:22px;border-radius:5px;}
+.serve__note{text-align:center;color:var(--ink-dim);font-size:13.5px;margin-top:18px;}
+
+/* ============ WHY ============ */
+.why__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.why-card{padding:28px 22px;border-radius:14px;background:var(--panel);border:1px solid var(--line);text-align:left;}
+.why-card:nth-child(1){transition-delay:0s;}
+.why-card:nth-child(2){transition-delay:.12s;}
+.why-card:nth-child(3){transition-delay:.24s;}
+.why-card:nth-child(4){transition-delay:.36s;}
+.why-card i{font-size:24px;color:#ffffff;margin-bottom:18px;}
+html[data-theme="light"] .why-card i{color:#000000;}
+.why-card h3{font-size:16.5px;margin-bottom:8px;}
+.why-card p{color:var(--ink-dim);font-size:14px;}
+@media (max-width:980px){.why__grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.why__grid{grid-template-columns:1fr;}}
+
+/* ============ CONTACT (always a white section) ============ */
+.contact{
+  background:#ffffff;border-top:1px solid var(--line);
+  --bg:#ffffff; --bg-alt:#ffffff; --panel:#f7f6f2; --panel-2:#efeee8;
+  --ink:#000000; --ink-dim:#3a3a3d; --line:rgba(0,0,0,.55);
+  color:#000000;
+}
+.contact .display{color:#000000;}
+.contact__grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:start;}
+.contact__cards{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+.c-card{
+  display:flex;align-items:center;gap:16px;padding:18px 20px;background:#000000;
+  border:1px solid #000000;border-radius:12px;transition:border-color .25s,transform .25s;color:#ffffff;
+}
+.c-card:hover{border-color:var(--orange);transform:translateX(4px);}
+.c-card i{width:42px;height:42px;border-radius:50%;background:var(--orange-tint);color:var(--orange);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.c-card small{display:block;color:rgba(255,255,255,.65);font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.c-card strong{font-size:15.5px;color:#ffffff;}
+.contact__cards{margin-bottom:4px;}
+
+.form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:38px 34px;}
+.form__row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field label{font-size:12.5px;font-weight:700;letter-spacing:.5px;color:var(--ink-dim);text-transform:uppercase;}
+.field input,.field select,.field textarea{
+  background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:13px 14px;color:var(--ink);
+  font-size:14.5px;transition:border-color .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--orange);outline:none;}
+.field textarea{resize:vertical;min-height:100px;}
+.form__foot{margin-top:6px;display:flex;flex-direction:column;gap:14px;}
+.form__note{font-size:12.5px;color:var(--ink-dim);}
+.toast{
+  margin-top:14px;padding:14px 16px;border-radius:8px;background:var(--orange-tint);color:var(--orange);
+  font-size:14px;font-weight:700;display:none;align-items:center;gap:10px;
+}
+.toast.show{display:flex;}
+@media (max-width:900px){.contact__grid{grid-template-columns:1fr;}.form__row{grid-template-columns:1fr;}}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--bg);padding-top:80px;}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:60px;border-bottom:1px solid var(--line);}
+.footer__brand p{color:var(--ink-dim);font-size:14px;margin-top:16px;max-width:280px;}
+.footer h4{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);margin-bottom:18px;}
+.footer ul{display:flex;flex-direction:column;gap:11px;}
+.footer ul a{font-size:14.5px;color:var(--ink);transition:color .2s;}
+.footer ul a:hover{color:var(--orange);}
+.footer__socials{display:flex;gap:12px;margin-top:20px;}
+.footer__socials a{
+  width:40px;height:40px;border-radius:12px;border:none;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;overflow:hidden;padding:0;background:transparent;
+}
+.footer__socials a:hover{transform:scale(1.1);}
+.footer__socials a img{width:100%;height:100%;object-fit:contain;display:block;}
+.footer__bottom{display:flex;align-items:center;justify-content:space-between;padding:26px 0 30px;flex-wrap:wrap;gap:12px;}
+.footer__bottom small{color:var(--ink-dim);font-size:13px;}
+.footer__tagline{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.5px;}
+.footer__tagline .o{color:var(--orange);}
+.footer__ticker{background:var(--orange);color:#0a0a0c;overflow:hidden;padding:12px 0;margin-top:10px;}
+.footer__ticker .marquee__track span{color:#0a0a0c;}
+@media (max-width:900px){.footer__grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.footer__grid{grid-template-columns:1fr;}.footer__bottom{flex-direction:column;align-items:flex-start;}}
+
+/* ============ BACK TO TOP ============ */
+.totop{
+  position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;background:var(--orange);
+  color:#0a0a0c;display:flex;align-items:center;justify-content:center;font-size:16px;z-index:70;
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .3s;
+  box-shadow:var(--shadow);
+}
+.totop.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+</style>
+</head>
+<body>
+
+<!-- ============ UNIVERSAL TOP BAR ============ -->
+<header class="topbar">
+  <div class="topbar__left">
+    <button class="topbar__burger" id="burgerBtn" aria-label="Open sidebar menu"><i class="fa-solid fa-bars"></i><span class="tip">Menu</span></button>
+  </div>
+  <div class="topbar__right">
+    <span class="topbar__brand">RMG <span>Solutions</span> Group</span>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER ============ -->
+<div class="drawer" id="drawer">
+  <div class="drawer__scrim" id="drawerScrim"></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <div class="logo-lockup logo-lockup--img">
+        <img class="logo-mark" src="assets/logo.png" alt="RMG Solutions Group">
+        <span class="logo-word"><span class="g1">RMG SOLUTIONS</span><span class="g2">GROUP</span></span>
+      </div>
+      <button class="drawer__close" id="drawerClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <nav class="drawer__nav" id="drawerNav">
+      <a href="#home" class="drawer__link active" data-target="home"><i class="fa-solid fa-house"></i>Home</a>
+      <a href="#about" class="drawer__link" data-target="about"><i class="fa-solid fa-circle-info"></i>About Us</a>
+      <a href="#services" class="drawer__link" data-target="services"><i class="fa-solid fa-layer-group"></i>What We Do</a>
+      <a href="#serve" class="drawer__link" data-target="serve"><i class="fa-solid fa-users"></i>Who We Serve</a>
+      <a href="#why" class="drawer__link" data-target="why"><i class="fa-solid fa-star"></i>Why Us</a>
+      <a href="#contact" class="drawer__link" data-target="contact"><i class="fa-solid fa-envelope-open-text"></i>Contact</a>
+    </nav>
+    <div class="drawer__cta">
+      <a href="#contact" class="btn btn--solid btn--block">Get a Quote</a>
+      <div class="drawer__socials">
+        <a href="https://wa.me/27645125770" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/facebook.png" alt="Facebook"></a>
+        <a href="https://instagram.com/rmgsolutionsgroup" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="site">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <div class="logo-lockup logo-lockup--img hero__brand">
+          <img class="logo-mark" src="assets/logo.png" alt="RMG Solutions Group">
+          <span class="logo-word"><span class="g1">RMG SOLUTIONS</span><span class="g2">GROUP</span></span>
+        </div>
+        <h1 class="display hero__title">
+          <span class="l1">RMG</span>
+          <span class="l2">SOLUTIONS</span>
+          <span class="l3">GROUP</span>
+        </h1>
+        <div class="hero__rule"><span></span><small>SOUTH&nbsp;AFRICA</small></div>
+        <p class="hero__tag">CLEAN. <span class="o">SAFE.</span> <span class="o">POWERED.</span></p>
+        <p class="hero__desc">One team for everything your property needs: cleaning, gardening, logistics and maintenance, handled by people who actually show up.</p>
+        <div class="hero__ctas">
+          <a href="#contact" class="btn btn--solid">Get a Quote</a>
+          <a href="tel:+27645125770" class="btn btn--outline"><i class="fa-solid fa-phone"></i>&nbsp; Call Now</a>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <img class="hero__photo" src="assets/hero-truck.png" alt="RMG Solutions Group delivery truck" loading="eager">
+        <p class="hero__caption">We deliver quality, safety and efficiency in every service, every time.</p>
+      </div>
+      <div class="badge">
+        <i class="fa-solid fa-check"></i>
+        <b>RELIABLE<br>SOLUTIONS.</b>
+        <b class="o">EXCEPTIONAL<br>RESULTS.</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack">
+      <span><i class="fa-solid fa-circle"></i>CLEAN<i class="fa-solid fa-circle"></i>SAFE<i class="fa-solid fa-circle"></i>POWERED<i class="fa-solid fa-circle"></i>RELIABLE<i class="fa-solid fa-circle"></i>ON TIME<i class="fa-solid fa-circle"></i>LOCAL &amp; TRUSTED<i class="fa-solid fa-circle"></i>QUALITY WORK</span>
+      <span><i class="fa-solid fa-circle"></i>CLEAN<i class="fa-solid fa-circle"></i>SAFE<i class="fa-solid fa-circle"></i>POWERED<i class="fa-solid fa-circle"></i>RELIABLE<i class="fa-solid fa-circle"></i>ON TIME<i class="fa-solid fa-circle"></i>LOCAL &amp; TRUSTED<i class="fa-solid fa-circle"></i>QUALITY WORK</span>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section about" id="about">
+    <div class="container about__grid">
+      <div class="reveal">
+        <div class="eyebrow">About Us</div>
+        <h2 class="display" style="font-size:clamp(30px,4vw,44px);margin-top:14px;">Built on trust.<br>Backed by results.</h2>
+        <p class="about__quote">"We deliver quality, safety and efficiency in every service, every time."</p>
+        <div class="about__body">
+          <p>RMG Solutions Group is a proudly South African company offering practical, everyday solutions for homes, offices, schools, and industrial sites. From a spotless office to a garden that's under control, a package that needs to move, or a property that needs fixing, one call gets it sorted.</p>
+          <p>We're a hands-on, local team. No call centres, no runaround, just people who turn up, do the work properly, and treat every job like it's their own.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="about__photo"><img src="assets/about-team.png" alt="RMG Solutions Group team member with delivery truck" loading="lazy"></div>
+        <div class="about__stats">
+        <div class="stat"><b>5+</b><span>Years Serving South Africa</span></div>
+        <div class="stat"><b>1,200+</b><span>Jobs Completed</span></div>
+        <div class="stat"><b>4</b><span>Core Service Lines</span></div>
+        <div class="stat"><b>24/7</b><span>WhatsApp Response</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">What We Do</div>
+        <h2 class="display">Four ways we keep<br>things running.</h2>
+        <p>Every service is delivered by the same standard: show up, do it right, leave it better than we found it.</p>
+      </div>
+      <div class="services__grid">
+        <div class="svc">
+          <div class="svc__photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_janitor_cleaning_up_the_sidewalk.jpg" alt="Cleaner at work" loading="lazy"><div class="svc__icon"><i class="fa-solid fa-broom"></i></div></div>
+          <div class="svc__body"><h3>Cleaning</h3><p>Homes, offices &amp; work sites: deep cleans and regular upkeep.</p></div>
+        </div>
+        <div class="svc">
+          <div class="svc__photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Robomow_110_City_2012-06-05.jpg" alt="Lawn and garden care" loading="lazy"><div class="svc__icon"><i class="fa-solid fa-leaf"></i></div></div>
+          <div class="svc__body"><h3>Gardening</h3><p>Lawn care, landscaping and ongoing garden maintenance.</p></div>
+        </div>
+        <div class="svc">
+          <div class="svc__photo"><img src="assets/about-team.png" alt="RMG logistics and delivery operations" loading="lazy" style="object-position:70% 40%;"><div class="svc__icon"><i class="fa-solid fa-truck-fast"></i></div></div>
+          <div class="svc__body"><h3>Logistics</h3><p>Deliveries, transport and freight: planned and tracked.</p></div>
+        </div>
+        <div class="svc">
+          <div class="svc__photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Commercial_Building_Maintenance_in_Rockville_Maryland.jpg" alt="Property maintenance work" loading="lazy"><div class="svc__icon"><i class="fa-solid fa-screwdriver-wrench"></i></div></div>
+          <div class="svc__body"><h3>Maintenance</h3><p>General property upkeep and repairs, big or small.</p></div>
+        </div>
+        <div class="svc" style="display:flex;flex-direction:column;justify-content:center;background:var(--orange);border:none;">
+          <div style="padding:30px 24px;">
+            <h3 style="color:#0a0a0c;">Need something else?</h3>
+            <p style="color:rgba(10,10,12,.75);margin-bottom:16px;">If it keeps your property running, chances are we can help.</p>
+            <a href="#contact" class="btn btn--outline" style="border-color:#0a0a0c;color:#0a0a0c;width:fit-content;">Ask Us <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVE — CAROUSEL ============ -->
+  <section class="section serve" id="serve">
+    <div class="container serve__grid">
+      <div class="serve__visual reveal">
+        <div class="carousel" id="serveCarousel">
+          <div class="carousel__viewport">
+            <div class="flip-card" id="flipCard">
+              <div class="flip-card__inner" id="flipInner">
+                <div class="flip-face flip-face--front" id="faceFront">
+                  <i class="fa-solid fa-house"></i>
+                  <h3>Residential</h3>
+                  <span>Homes &amp; households</span>
+                  <div class="flip-hint"><i class="fa-solid fa-rotate"></i> Tap to flip</div>
+                </div>
+                <div class="flip-face flip-face--back" id="faceBack">
+                  <i class="fa-solid fa-house"></i>
+                  <p>Cleaning, gardening and maintenance for houses, estates and residential complexes, kept simple for busy households.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel__controls">
+            <button class="car-btn" id="carPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="car-dots" id="carDots"></div>
+            <button class="car-btn" id="carNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="serve__copy reveal">
+        <div class="eyebrow">Who We Serve</div>
+        <h2 class="display">One team, every<br>kind of property.</h2>
+        <p class="muted" style="margin-top:16px;max-width:420px;">Tap the card to flip it, or let it run on its own: five sectors, one standard of work.</p>
+        <p class="serve__note" style="text-align:left;margin-top:24px;">Residential &middot; Commercial &middot; Industrial &middot; Schools &middot; Retail</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY US ============ -->
+  <section class="section section--tight" id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Why Choose RMG Solutions Group?</div>
+        <h2 class="display">The details other<br>teams skip.</h2>
+      </div>
+      <div class="why__grid">
+        <div class="why-card reveal"><i class="fa-solid fa-shield-halved"></i><h3>Reliable</h3><p>We show up and get the job done.</p></div>
+        <div class="why-card reveal"><i class="fa-solid fa-stopwatch"></i><h3>On Time</h3><p>Every time, no delays.</p></div>
+        <div class="why-card reveal"><i class="fa-solid fa-location-dot"></i><h3>Local &amp; Trusted</h3><p>Proudly serving homes, offices &amp; businesses.</p></div>
+        <div class="why-card reveal"><i class="fa-solid fa-thumbs-up"></i><h3>Quality Work</h3><p>We care about the small details.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="container contact__grid">
+      <div class="reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2 class="display" style="font-size:clamp(30px,4vw,44px);margin-top:14px;">Let's sort it out.</h2>
+        <p class="muted" style="margin-top:14px;max-width:380px;">Call, WhatsApp or send a message. We usually reply within the hour during the day.</p>
+        <div class="contact__cards">
+          <a class="c-card" href="tel:+27645125770"><i class="fa-solid fa-phone"></i><span><small>Call</small><strong>064 512 5770</strong></span></a>
+          <a class="c-card" href="https://wa.me/27645125770" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span><small>WhatsApp</small><strong>064 512 5770</strong></span></a>
+          <a class="c-card" href="mailto:rmgsolutionsgroup@gmail.com"><i class="fa-solid fa-envelope"></i><span><small>Email</small><strong>rmgsolutionsgroup@gmail.com</strong></span></a>
+          <a class="c-card" href="https://instagram.com/rmgsolutionsgroup" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i><span><small>Instagram</small><strong>@rmgsolutionsgroup</strong></span></a>
+        </div>
+      </div>
+
+      <form class="form reveal" id="contactForm">
+        <div class="form__row">
+          <div class="field"><label for="fname">Name</label><input id="fname" type="text" placeholder="Your name" required></div>
+          <div class="field"><label for="fphone">Phone</label><input id="fphone" type="tel" placeholder="Your number" required></div>
+        </div>
+        <div class="form__row">
+          <div class="field"><label for="femail">Email</label><input id="femail" type="email" placeholder="you@email.com" required></div>
+          <div class="field"><label for="fservice">Service</label>
+            <select id="fservice">
+              <option>Cleaning</option><option>Gardening</option>
+              <option>Logistics</option><option>Maintenance</option><option>Something else</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:20px;"><label for="fmsg">Message</label><textarea id="fmsg" placeholder="Tell us a bit about the job..." required></textarea></div>
+        <div class="form__foot">
+          <button type="submit" class="btn btn--solid btn--block">Send Message</button>
+          <div class="toast" id="formToast"><i class="fa-solid fa-circle-check"></i><span>Opening your email app...</span></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <div class="logo-lockup logo-lockup--img">
+          <img class="logo-mark" src="assets/logo.png" alt="RMG Solutions Group">
+          <span class="logo-word"><span class="g1">RMG SOLUTIONS</span><span class="g2">GROUP</span></span>
+        </div>
+        <p>Clean, safe and powered service across South Africa: cleaning, gardening, logistics and maintenance, all from one team.</p>
+        <div class="footer__socials">
+          <a href="https://wa.me/27645125770" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><img src="assets/facebook.png" alt="Facebook"></a>
+          <a href="https://instagram.com/rmgsolutionsgroup" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/instagram.png" alt="Instagram"></a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">What We Do</a></li>
+          <li><a href="#serve">Who We Serve</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Cleaning</a></li>
+          <li><a href="#services">Gardening</a></li>
+          <li><a href="#services">Logistics</a></li>
+          <li><a href="#services">Maintenance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>064 512 5770</li>
+          <li>rmgsolutionsgroup@gmail.com</li>
+          <li>rmgsolutiongroup.co.za</li>
+          <li>@rmgsolutionsgroup</li>
+          <li>South Africa</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <small id="footYear">&copy; 2026 RMG Solutions Group. All rights reserved.</small>
+      </div>
+      <p class="footer__tagline">ONE TEAM. <span class="o">ONE STANDARD.</span> <span class="o">ONE SOLUTION.</span></p>
+    </div>
+    <div class="footer__ticker" aria-hidden="true">
+      <div class="marquee__track">
+        <span><i class="fa-solid fa-truck-fast"></i>WE DELIVER MORE THAN PARCELS<i class="fa-solid fa-circle"></i>RELIABLE. FAST. SAFE.<i class="fa-solid fa-circle"></i></span>
+        <span><i class="fa-solid fa-truck-fast"></i>WE DELIVER MORE THAN PARCELS<i class="fa-solid fa-circle"></i>RELIABLE. FAST. SAFE.<i class="fa-solid fa-circle"></i></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<button class="totop" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+/* ===== MOBILE DRAWER ===== */
+const drawer = document.getElementById('drawer');
+const openDrawer = ()=> drawer.classList.add('open');
+const closeDrawer = ()=> drawer.classList.remove('open');
+document.getElementById('burgerBtn').addEventListener('click', openDrawer);
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+document.getElementById('drawerScrim').addEventListener('click', closeDrawer);
+document.querySelectorAll('.drawer__link').forEach(a=> a.addEventListener('click', closeDrawer));
+
+/* ===== SCROLLSPY (rail + drawer active link) ===== */
+const sections = ['home','about','services','serve','why','contact'].map(id=>document.getElementById(id));
+const drawerLinks = document.querySelectorAll('.drawer__link');
+const spy = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      drawerLinks.forEach(l=> l.classList.toggle('active', l.dataset.target === id));
+    }
+  });
+},{ rootMargin: '-45% 0px -45% 0px' });
+sections.forEach(s=> s && spy.observe(s));
+
+/* ===== SCROLL REVEAL ===== */
+const revealItems = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+},{ threshold: 0.15 });
+revealItems.forEach(el=> revealObs.observe(el));
+
+/* ===== BACK TO TOP ===== */
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  toTop.classList.toggle('show', window.scrollY > 500);
+});
+toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+/* ===== SERVE CAROUSEL (slide + flip) ===== */
+const sectors = [
+  {icon:'fa-house', title:'Residential', tag:'Homes & households', blurb:'Cleaning, gardening and maintenance for houses, estates and residential complexes, kept simple for busy households.'},
+  {icon:'fa-building', title:'Commercial', tag:'Offices & business parks', blurb:'Reliable cleaning and maintenance support so offices and business premises always present well.'},
+  {icon:'fa-industry', title:'Industrial', tag:'Sites & warehouses', blurb:'Logistics, freight and site upkeep built for the pace and scale of industrial operations.'},
+  {icon:'fa-graduation-cap', title:'Schools', tag:'Education facilities', blurb:'Safe, thorough cleaning and grounds care that keeps learning environments healthy and tidy.'},
+  {icon:'fa-bag-shopping', title:'Retail', tag:'Shops & storefronts', blurb:'Deliveries, cleaning and logistics work that keeps storefronts running smoothly.'}
+];
+let carIndex = 0;
+let isFlipped = false;
+const flipCard = document.getElementById('flipCard');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const carDots = document.getElementById('carDots');
+
+sectors.forEach((_,i)=>{
+  const b = document.createElement('button');
+  if(i===0) b.classList.add('active');
+  b.addEventListener('click', ()=> goTo(i));
+  carDots.appendChild(b);
+});
+
+function renderCard(){
+  const s = sectors[carIndex];
+  faceFront.innerHTML = `<i class="fa-solid ${s.icon}"></i><h3>${s.title}</h3><span>${s.tag}</span><div class="flip-hint"><i class="fa-solid fa-rotate"></i> Tap to flip</div>`;
+  faceBack.innerHTML = `<i class="fa-solid ${s.icon}"></i><p>${s.blurb}</p>`;
+  [...carDots.children].forEach((d,i)=> d.classList.toggle('active', i===carIndex));
+}
+function goTo(i){
+  carIndex = (i + sectors.length) % sectors.length;
+  isFlipped = false;
+  flipCard.classList.remove('flipped');
+  renderCard();
+}
+flipCard.addEventListener('click', ()=>{
+  isFlipped = !isFlipped;
+  flipCard.classList.toggle('flipped', isFlipped);
+});
+document.getElementById('carPrev').addEventListener('click', ()=> goTo(carIndex - 1));
+document.getElementById('carNext').addEventListener('click', ()=> goTo(carIndex + 1));
+renderCard();
+
+let autoFlip, autoSlide;
+function startAuto(){
+  autoFlip = setInterval(()=>{ isFlipped = true; flipCard.classList.add('flipped'); }, 3000);
+  autoSlide = setInterval(()=>{ goTo(carIndex + 1); }, 5200);
+}
+function stopAuto(){ clearInterval(autoFlip); clearInterval(autoSlide); }
+startAuto();
+document.getElementById('serveCarousel').addEventListener('mouseenter', stopAuto);
+document.getElementById('serveCarousel').addEventListener('mouseleave', startAuto);
+
+/* ===== CONTACT FORM (opens email app with message) ===== */
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('fname').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const service = document.getElementById('fservice').value;
+  const message = document.getElementById('fmsg').value.trim();
+  const subject = encodeURIComponent('Quote request: ' + service + ' from ' + name);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Phone: ' + phone + '\n' +
+    'Email: ' + email + '\n' +
+    'Service: ' + service + '\n\n' +
+    'Message:\n' + message + '\n\n' +
+    'Sent via rmgsolutiongroup.co.za'
+  );
+  document.getElementById('formToast').classList.add('show');
+  window.location.href = 'mailto:rmgsolutionsgroup@gmail.com?subject=' + subject + '&body=' + body;
+  setTimeout(()=> document.getElementById('formToast').classList.remove('show'), 4000);
+});
+
+/* ===== FOOTER YEAR ===== */
+document.getElementById('footYear').innerHTML = '&copy; ' + new Date().getFullYear() + ' RMG Solutions Group. All rights reserved.';
+</script>
+</body>
+</html>
